@@ -1,22 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        <img src="https://i.dlpng.com/static/png/232141_preview.png" className="App-logo" alt="logo" />
+        <h1>
+          <b>🚀 Welcome to the Pokemon App 🙌</b>
+        </h1>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href="#"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          <b>
+            Start
+          </b>
         </a>
       </header>
     </div>

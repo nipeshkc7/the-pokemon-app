@@ -1,3 +1,7 @@
+# The Pokemon App 
+
+A fun little React project that uses the [Pokemon API](https://pokeapi.co/).
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
