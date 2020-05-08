@@ -1,0 +1,7 @@
+export const START_APP = 'START_APP'
+export const CHOOSE_POKEMON = 'CHOOSE_POKEMON'
+export const SET_MOVES = 'SET_MOVES'
+export const TRAIN = 'TRAIN'
+export const GIVE_BERRIES = 'GIVE_BERRIES'
+export const PET = 'PET'
+export const BATHE = 'BATHE'

@@ -1,6 +1,8 @@
 .App {
   text-align: center;
   font-family: Arial, Helvetica, sans-serif ;
+  display: flex;
+  justify-content: center;
 }
 
 .App-logo {
@@ -21,6 +23,11 @@
 
 .App-link {
   color: #CC0000;
+}
+
+.Start {
+  border-radius: 15px;
+  width: fit-content;
 }
 
 @keyframes App-logo-spin {
