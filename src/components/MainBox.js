@@ -17,11 +17,15 @@ const MainBox = ({ dispatch }) => {
           rel="noopener noreferrer"
           href="#"
         >
-          <b onClick={e => dispatch(startApp('STARTED'))}>
+          <b onClick={e => {
+            alert('Working on it, geez calm down buddy');
+            return dispatch(startApp('STARTED'))
+          }
+          }>
             Start
         </b>
         </a>
-        <br/>
+        <br />
         <small className="My-Name">By <a href="https://arpankc.com" target="_blank">Arpan KC</a></small>
       </header>
     </div>
