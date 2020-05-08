@@ -5,7 +5,7 @@ import MainBox from './MainBox';
 function App() {
   return (
     <div className="App">
-      <MainBox></MainBox>
+      <MainBox class="mainContent"></MainBox>
     </div>
   );
 }

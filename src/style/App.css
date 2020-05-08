@@ -1,8 +1,9 @@
 .App {
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif ;
+  font-family: 'Varela Round', sans-serif;
   display: flex;
   justify-content: center;
+  background-color: #F0F0F0;
 }
 
 .App-logo {
@@ -10,8 +11,11 @@
   pointer-events: none;
 }
 
+.My-Name{
+  color:black;
+  font-size:18px;
+}
 .App-header {
-  background-color: #B3A125;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -19,15 +23,11 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: #3b4cca;
+  padding: 20px 40px;
 }
 
 .App-link {
   color: #CC0000;
-}
-
-.Start {
-  border-radius: 15px;
-  width: fit-content;
 }
 
 @keyframes App-logo-spin {

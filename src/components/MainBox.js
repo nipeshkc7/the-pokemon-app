@@ -10,18 +10,19 @@ const MainBox = ({ dispatch }) => {
       <header className="App-header">
         <img src={Pokeball} className="App-logo" alt="logo" />
         <h2>
-          <b>🚀 Welcome to the Pokemon App🙌</b>
+          <b>🚀🚀 Welcome to the Pokemon App</b>
         </h2>
         <a
           className="App-link"
           rel="noopener noreferrer"
           href="#"
         >
-          <br />
           <b onClick={e => dispatch(startApp('STARTED'))}>
             Start
         </b>
         </a>
+        <br/>
+        <small className="My-Name">By <a href="https://arpankc.com" target="_blank">Arpan KC</a></small>
       </header>
     </div>
   )
