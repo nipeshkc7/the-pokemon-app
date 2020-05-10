@@ -1,35 +1,54 @@
 import React from 'react';
-import { connect } from 'react-redux'
 import '../style/App.css';
-import { startApp } from '../actions';
-import Pokeball from '../assets/pokeball.png'
+import StartBox from '../containers/StartBox'
+import * as types from '../constants/ActionTypes'
+import Grid from '@material-ui/core/Grid';
+import ChoosePokemon from '../components/ChoosePokemon';
+import ChooseMoves from '../components/ChooseMoves';
+import TrainPokemon from '../components/TrainPokemon';
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
-const MainBox = ({ dispatch }) => {
-  return (
-    <div className="Start">
-      <header className="App-header">
-        <img src={Pokeball} className="App-logo" alt="logo" />
-        <h2>
-          <b>🚀🚀 Welcome to the Pokemon App</b>
-        </h2>
-        <a
-          className="App-link"
-          rel="noopener noreferrer"
-          href="#"
-        >
-          <b onClick={e => {
-            alert('Working on it, geez calm down buddy');
-            return dispatch(startApp('STARTED'))
-          }
-          }>
-            Start
-        </b>
-        </a>
-        <br />
-        <small className="My-Name">By <a href="https://arpankc.com" target="_blank">Arpan KC</a></small>
-      </header>
-    </div>
-  )
+
+const MainBox = ({ appState, actions }) => {
+  console.log('app state');
+  console.log(appState);
+  switch (appState) {
+    case types.NOT_YET_STARTED:
+      return (
+        <div className="Start">
+          <StartBox></StartBox>
+        </div>
+      )
+    case 'PICKING_POKEMON':
+      return (
+        <React.Fragment>
+          <CssBaseline />
+          <Container fixed className="App-box">
+            <Grid container spacing={3}>
+              <Grid item sm={4} xs={12}>
+                <ChoosePokemon>
+                </ChoosePokemon>
+              </Grid>
+              <Grid item sm={4} xs={12}>
+                <ChooseMoves>
+                </ChooseMoves>
+              </Grid>
+              <Grid item sm={4} xs={12}>
+                <TrainPokemon>
+                </TrainPokemon>
+              </Grid>
+            </Grid>
+          </Container>
+        </React.Fragment>
+      )
+    default:
+      return (
+        <div className="Start">
+          <StartBox></StartBox>
+        </div>
+      )
+  }
 }
 
-export default connect()(MainBox);
+export default MainBox;

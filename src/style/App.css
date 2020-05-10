@@ -1,8 +1,12 @@
+html{
+  background-color: #F0F0F0;
+}
+
 .App {
-  text-align: center;
+  /* text-align: center; */
   font-family: 'Varela Round', sans-serif;
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
   background-color: #F0F0F0;
 }
 
@@ -15,6 +19,7 @@
   color:black;
   font-size:18px;
 }
+
 .App-header {
   min-height: 100vh;
   display: flex;
@@ -26,15 +31,44 @@
   padding: 20px 40px;
 }
 
+.App-box{
+  margin-top: 9vh;
+}
+
 .App-link {
   color: #CC0000;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Pokemon-sprite{
+  width: 60%;
+  height: 60%;
+}
+
+.Action-box{
+  border: 1px solid lightgrey;
+  height: 100%;
+  font-family: 'Varela Round', sans-serif;
+  text-align: center;
+  padding: 1.5em 2em 6em 2em;
+  border-radius: 5px;
+}
+
+.Main-form{
+  height: 100%;
+}
+
+.theNinetyPercent{
+  height:90%;
+}
+.End-action-button{
+  width:50%;
+}
+
+.Train-action{
+  width: 70%;
+  margin-top: 2em;
+}
+
+.Start-button{
+  width: 12em;
 }

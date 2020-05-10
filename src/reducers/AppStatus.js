@@ -1,13 +1,25 @@
 import {
-    START_APP
+    START_APP,
+    PICK_POKEMON,
+    PICK_MOVES,
+    TRAIN_MODE,
+    END,
 } from '../constants/ActionTypes'
 
-const APP_STATE = 'WELCOME';
+const APP_STATE = 'NOT_STARTED';
 
 export default function AppStatus(state = APP_STATE, action) {
     switch (action.type) {
         case START_APP:
-            return 'STARTED';
+            return 'PICKING_POKEMON';
+        case PICK_POKEMON:
+            return 'PICKING_POKEMON';
+        case PICK_MOVES:
+            return 'PICKING_MOVES';
+        case TRAIN_MODE:
+            return 'TRAINING_MODE';
+        case END:
+            return 'END';
         default:
             return state;
     }
