@@ -9,6 +9,7 @@ import {
 const APP_STATE = 'NOT_STARTED';
 
 export default function AppStatus(state = APP_STATE, action) {
+    console.log(`the action type is ${ action.type }`)
     switch (action.type) {
         case START_APP:
             return 'PICKING_POKEMON';
@@ -17,7 +18,7 @@ export default function AppStatus(state = APP_STATE, action) {
         case PICK_MOVES:
             return 'PICKING_MOVES';
         case TRAIN_MODE:
-            return 'TRAINING_MODE';
+            return 'TRAINING_POKEMON';
         case END:
             return 'END';
         default:

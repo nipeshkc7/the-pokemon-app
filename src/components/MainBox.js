@@ -11,8 +11,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 
 const MainBox = ({ appState, actions }) => {
-  console.log('app state');
-  console.log(appState);
   switch (appState) {
     case types.NOT_YET_STARTED:
       return (
@@ -21,6 +19,9 @@ const MainBox = ({ appState, actions }) => {
         </div>
       )
     case 'PICKING_POKEMON':
+    case 'PICKING_MOVES':
+    case 'TRAINING_POKEMON':
+    case 'END':
       return (
         <React.Fragment>
           <CssBaseline />

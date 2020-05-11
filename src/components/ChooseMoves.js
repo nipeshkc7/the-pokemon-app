@@ -9,93 +9,76 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-import ImageIcon from '@material-ui/icons/Image';
-import WorkIcon from '@material-ui/icons/Work';
-import BeachAccessIcon from '@material-ui/icons/BeachAccess';
+import Grow from '@material-ui/core/Grow';
 import DoneIcon from '@material-ui/icons/DoneOutlined'
+import { useSelector, useDispatch } from 'react-redux'
+import * as allActions from '../actions'
 
+const ChooseMoves = () => {
 
-const chooseMoves = ({ }) => {
-    const pokemonTypes = [
-        {
-            value: 'Normal',
-            label: 'Normal',
-        },
-        {
-            value: 'Fighting',
-            label: 'Fighting',
-        },
-        {
-            value: 'Ghost',
-            label: 'Ghost',
-        },
-        {
-            value: 'Dark',
-            label: 'Dark',
-        },
-    ];
-
-    const handleChange = (event) => {
-        // setCurrency(event.target.value);
-    };
+    const appState = useSelector(state => state.AppStatus);
+    const dispatch = useDispatch();
+    let elevation = appState === 'PICKING_MOVES' ? 4 : 0;
 
     return (
-        <Paper className="Action-box" elevation={1}>
-            <Typography variant="h5" gutterBottom>
-                <b>✨ SELECT MOVES ✨</b>
-            </Typography>
-            <hr />
-            <form noValidate autoComplete="off" className="Main-form">
-                <br/>
-                <div className="theNinetyPercent">
-                    <TextField id="standard-basic" label="Enter Move Name" />
+        <Grow in={true}>
+            <Paper className="Action-box" elevation={elevation}>
+                <Typography variant="h5" gutterBottom>
+                    <b><span role="img" aria-label="emoji">✨</span> SELECT MOVES <span role="img" aria-label="emoji">✨</span></b>
+                </Typography>
+                <hr />
+                <form noValidate autoComplete="off" className="Main-form">
                     <br />
-                    <br />
+                    <div className="theNinetyPercent">
+                        <TextField id="standard-basic" label="Enter Move Name" />
+                        <br />
+                        <br />
                 OR,
                 <br />
-                    <br />
-                    <Button variant="contained" color="secondary"
-                    className="Train-action">
-                        Get Random Moves
+                        <br />
+                        <Button variant="contained" color="secondary"
+                            className="Train-action">
+                            Get Random Moves
                 </Button>
-                    <div>
-                        <List>
-                            <ListItem>
-                                <ListItemAvatar>
-                                    <Avatar>
-                                        <DoneIcon />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText primary="Move 1" secondary="No Type" />
-                            </ListItem>
-                            <ListItem>
-                                <ListItemAvatar>
-                                    <Avatar>
-                                        <DoneIcon />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText primary="Move 2" secondary="No Type" />
-                            </ListItem>
-                            <ListItem>
-                                <ListItemAvatar>
-                                    <Avatar>
-                                        <DoneIcon />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText primary="Move 3" secondary="No Type" />
-                            </ListItem>
-                        </List>
+                        <div>
+                            <List>
+                                <ListItem>
+                                    <ListItemAvatar>
+                                        <Avatar>
+                                            <DoneIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Move 1" secondary="No Type" />
+                                </ListItem>
+                                <ListItem>
+                                    <ListItemAvatar>
+                                        <Avatar>
+                                            <DoneIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Move 2" secondary="No Type" />
+                                </ListItem>
+                                <ListItem>
+                                    <ListItemAvatar>
+                                        <Avatar>
+                                            <DoneIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Move 3" secondary="No Type" />
+                                </ListItem>
+                            </List>
+                        </div>
                     </div>
-                </div>
-                <Button variant="contained" color="primary" className="End-action-button"
-                    onClick={() => {
-                        // ..TODO
-                    }}>
-                    Done !
+                    <Button variant="contained" color="primary" className="End-action-button"
+                        onClick={() => {
+                            dispatch(allActions.trainPokemon());
+                        }}>
+                        Done !
                  </Button>
-            </form>
-        </Paper>
+                </form>
+            </Paper>
+        </Grow>
     )
 }
 
-export default chooseMoves;
+export default ChooseMoves;

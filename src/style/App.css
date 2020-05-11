@@ -72,3 +72,8 @@ html{
 .Start-button{
   width: 12em;
 }
+
+.Pokemon-name{
+  text-transform: capitalize;
+  font-size: 2rem;
+}

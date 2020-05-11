@@ -8,7 +8,7 @@ const StartBox = ({ appState, actions }) => {
         <div className="App-header">
             <img src={Pokeball} className="App-logo" alt="logo" />
             <h2>
-                <b>🚀🚀 Welcome to the Pokemon App</b>
+                <b><span role="img" aria-label="emoji">🚀🚀</span> Welcome to the Pokemon App</b>
             </h2>
             <Button variant="contained" size="large" color="secondary"
             className="Start-button"
@@ -18,7 +18,8 @@ const StartBox = ({ appState, actions }) => {
                 <b>Start</b>
             </Button>
             <br />
-            <small className="My-Name">By <a href="https://arpankc.com" target="_blank">Arpan KC</a></small>
+            <small className="My-Name">By <a href="https://arpankc.com" target="_blank"
+            rel="noopener noreferrer">Arpan KC</a></small>
         </div>
     )
 }
