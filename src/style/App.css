@@ -32,7 +32,7 @@ html{
 }
 
 .App-box{
-  margin-top: 9vh;
+  margin-top: 6vh;
 }
 
 .App-link {
@@ -76,4 +76,29 @@ html{
 .Pokemon-name{
   text-transform: capitalize;
   font-size: 2rem;
+  padding:0;
+  margin:0;
+  font-weight: 600;
+  color:rgb(145, 24, 24);
+}
+
+@keyframes animate-sprite {
+  0%   {transform: rotate(10deg)}
+  100%  {transform: rotate(-10deg)}
+  100% {transform: rotate(10deg)}
+}
+
+.Pokemon-sprite-small{
+  vertical-align: middle;
+  height: 3em;
+  padding:0;
+  margin-left:-0.4em;
+  margin-bottom: 0;
+}
+
+.Fabi{
+  position: absolute;
+  bottom: 0vh;
+  right: 0vw;
+  left: 0vw;
 }

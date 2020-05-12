@@ -8,6 +8,8 @@ import ChooseMoves from '../components/ChooseMoves';
 import TrainPokemon from '../components/TrainPokemon';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Fab from '@material-ui/core/Fab';
+import NavigationIcon from '@material-ui/icons/Navigation';
 
 
 const MainBox = ({ appState, actions }) => {

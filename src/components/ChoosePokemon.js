@@ -9,57 +9,42 @@ import Paper from '@material-ui/core/Paper';
 import Grow from '@material-ui/core/Grow';
 import { useDispatch, useSelector } from 'react-redux';
 import * as allActions from '../actions';
-import { POKE_API_URL , POKE_IMAGE_API_URL} from '../constants/AppConstants';
-
-const getPokemonTypeList = async () => {
-    let response = await fetch(`${POKE_API_URL}type`);
-    let data = await response.json();
-    return data.results.map(obj => obj.name);
-}
+import { POKE_API_URL, POKE_IMAGE_API_URL } from '../constants/AppConstants';
+import { PokemonTypes } from '../constants/PokemonTypes';
+import Chip from '@material-ui/core/Chip';
+import Avatar from '@material-ui/core/Avatar';
 
 const getRandomPokemon = async (pokemonType) => {
-    console.log(`player prefers ${pokemonType}`);       
+    console.log(`player prefers ${pokemonType}`);
     let response = await fetch(`${POKE_API_URL}type/${pokemonType}/`);
-    let pokemonNames = (await response.json()).pokemon.map(pokemon=>pokemon.pokemon.name);
+    let pokemonNames = (await response.json()).pokemon.map(pokemon => pokemon.pokemon.name);
     let RandomPokemonName = pokemonNames[Math.floor(Math.random() * (pokemonNames.length - 1))]; //Picks out a random pokemon name
     let getPokemonInfo = await fetch(`${POKE_API_URL}pokemon/${RandomPokemonName}`);
     return (await getPokemonInfo.json());
 }
 
-const getPokemonPicture = async (pokemonId) => {
-    return '';
-}
-
 function ChoosePokemon() {
 
-    const [pokemonTypes, setPokemonTypes] = useState(['']);
     const [playerPreference, setPlayerPreference] = useState('normal');
-    const [pokemon, setPokemon]= useState({});
-    const [pokemonImg, setPokemonImg]= useState(placeHolderImg);
+    const [pokemonImg, setPokemonImg] = useState(placeHolderImg);
 
+    const pokemon = useSelector(state => state.Pokemon);
     const appState = useSelector(state => state.AppStatus);
-    // const playerPreference = useSelector(state => state.playerPreference)
     const dispatch = useDispatch();
 
-    const handleChange = (event) =>{
+    const handleChange = (event) => {
         setPlayerPreference(event.target.value);
     }
 
-    const handleSubmit = async(event) =>{
+    const handleSubmit = async (event) => {
         event.preventDefault();
         let pokemon = await getRandomPokemon(playerPreference);
-        setPokemon(pokemon);
         setPokemonImg(`${POKE_IMAGE_API_URL}${pokemon.id}.png`);
+        dispatch(allActions.selectPokemon(pokemon));
+        dispatch(allActions.pickMoves());
     }
 
-    let elevation = appState === 'PICKING_POKEMON' ? 4 : 0;
-
-    useEffect(() => {
-        async function getList() {
-            setPokemonTypes(await getPokemonTypeList());
-        }
-        getList();
-    }, []);
+    let elevation = appState === 'PICKING_POKEMON' ? 24 : 0;
 
     return (
         <Grow in={true}>
@@ -71,19 +56,28 @@ function ChoosePokemon() {
                 <form autoComplete="off" className="Main-form" onSubmit={handleSubmit}>
                     <div className="theNinetyPercent">
                         <br />
-                        <TextField
+                        {appState === 'PICKING_POKEMON' &&
+                            <TextField
                             name="pokemonType"
                             select
                             label="Type Preferance"
                             helperText="Choose your favourite Pokemon Type"
-                            onChange={handleChange}
-                        >
-                            {pokemonTypes.map((option) => (
-                                <MenuItem key={option} value={option}>
-                                    {option}
-                                </MenuItem>
-                            ))}
-                        </TextField>
+                            onChange={handleChange}>
+                                {PokemonTypes.map((option) => (
+                                    <MenuItem key={option.name} value={option.name}>
+                                        <span role="image">{option.icon}</span>&nbsp; {option.name}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                        }
+                        {appState !== 'PICKING_POKEMON'&&
+                            <Chip className="Player-chosen-type"
+                            clickable
+                            avatar={<Avatar>{(PokemonTypes.find(pType => pType.name === playerPreference)).icon}</Avatar>}
+                            label ={playerPreference}
+                            >
+                            </Chip>
+                        }
                         <br />
                         <br />
 
@@ -92,13 +86,21 @@ function ChoosePokemon() {
                         <div>
                             <img className="Pokemon-sprite" src={pokemonImg} />
                         </div>
-                        <b className="Pokemon-name">{pokemon.name}</b>
+                        <b className="Pokemon-name"><a href="">{pokemon.name}</a></b>
                     </div>
                     <br />
+                    {appState === 'PICKING_POKEMON' &&
                     <Button type="submit" variant="contained" color="primary"
-                    className="End-action-button">
+                        className="End-action-button">
                         GO !
-                 </Button>
+                    </Button>
+                    }
+                    {appState !== 'PICKING_POKEMON' &&
+                    <Button variant="contained" color="info"
+                        className="End-action-button">
+                        View stats
+                    </Button>
+                    }
                 </form>
             </Paper>
         </Grow>

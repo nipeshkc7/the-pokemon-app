@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../style/App.css';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -14,11 +14,59 @@ import DoneIcon from '@material-ui/icons/DoneOutlined'
 import { useSelector, useDispatch } from 'react-redux'
 import * as allActions from '../actions'
 
+const getMoveByName = (pokemon, name) => {
+    if (pokemon === undefined) return;
+    let moveList = pokemon.moves.map(move => move.move.name);
+    if (moveList.includes(name)) return name;
+    return undefined;
+}
+
+const get3RandomMoves = (pokemon) => {
+    if (pokemon === undefined) return;
+    let moveList = pokemon.moves.map(move => move.move.name);
+    const RandomMoves = [];
+    for (let i = 0; i < 3; i++) {
+        RandomMoves.push(moveList[Math.floor(Math.random() * (moveList.length - 1))]);
+    }
+    return RandomMoves;
+}
+
+const addMove = (moveList, move) => {
+    let moveListCopy = [...moveList]
+    if (moveList.length === 3) {
+        moveListCopy.shift();
+        return [...moveListCopy, move];
+    }
+    return [...moveList, move];
+}
+
 const ChooseMoves = () => {
 
     const appState = useSelector(state => state.AppStatus);
+    const pokemon = useSelector(state => state.Pokemon);
     const dispatch = useDispatch();
-    let elevation = appState === 'PICKING_MOVES' ? 4 : 0;
+    const [moveList, setMoveList] = useState([]);
+
+    let elevation = appState === 'PICKING_MOVES' ? 24 : 0;
+
+    const handleGenerateMoves = () => {
+        setMoveList(get3RandomMoves(pokemon));
+    }
+
+    const findMove = (e) => {
+        e.preventDefault();
+        if (e.key === 'Enter') {
+            let move = getMoveByName(pokemon, e.target.value);
+            if (move !== undefined) {
+                setMoveList(addMove(moveList, move))
+            }
+            else { alert('Cannot Add move') }
+        }
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    }
 
     return (
         <Grow in={true}>
@@ -27,50 +75,42 @@ const ChooseMoves = () => {
                     <b><span role="img" aria-label="emoji">✨</span> SELECT MOVES <span role="img" aria-label="emoji">✨</span></b>
                 </Typography>
                 <hr />
-                <form noValidate autoComplete="off" className="Main-form">
+                <form autoComplete="off" className="Main-form" onSubmit={handleSubmit}>
                     <br />
                     <div className="theNinetyPercent">
-                        <TextField id="standard-basic" label="Enter Move Name" />
+                        <TextField id="standard-basic" label="Enter Move Name" onKeyUp={findMove} 
+                        disabled={appState !== 'PICKING_MOVES'}/>
                         <br />
                         <br />
                 OR,
-                <br />
+                        <br />
                         <br />
                         <Button variant="contained" color="secondary"
-                            className="Train-action">
+                            className="Train-action" onClick={handleGenerateMoves}
+                            disabled={appState !== 'PICKING_MOVES'}
+                            >
                             Get Random Moves
-                </Button>
+                        </Button>
                         <div>
                             <List>
-                                <ListItem>
+                                {moveList.map(move => (<ListItem>
                                     <ListItemAvatar>
                                         <Avatar>
                                             <DoneIcon />
                                         </Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText primary="Move 1" secondary="No Type" />
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemAvatar>
-                                        <Avatar>
-                                            <DoneIcon />
-                                        </Avatar>
-                                    </ListItemAvatar>
-                                    <ListItemText primary="Move 2" secondary="No Type" />
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemAvatar>
-                                        <Avatar>
-                                            <DoneIcon />
-                                        </Avatar>
-                                    </ListItemAvatar>
-                                    <ListItemText primary="Move 3" secondary="No Type" />
-                                </ListItem>
+                                    <ListItemText primary={move} secondary="No Type" />
+                                </ListItem>))}
                             </List>
                         </div>
                     </div>
                     <Button variant="contained" color="primary" className="End-action-button"
+                    disabled={appState!=='PICKING_MOVES'}
                         onClick={() => {
+                            moveList.forEach((move) => {
+                                if (move !== undefined) dispatch(allActions.addMove(move))
+                            }
+                            )
                             dispatch(allActions.trainPokemon());
                         }}>
                         Done !
