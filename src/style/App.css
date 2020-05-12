@@ -1,13 +1,13 @@
-html{
-  background-color: #F0F0F0;
+html {
+  background-color: #f0f0f0;
 }
 
 .App {
   /* text-align: center; */
-  font-family: 'Varela Round', sans-serif;
+  font-family: "Varela Round", sans-serif;
   /* display: flex;
   justify-content: center; */
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
 }
 
 .App-logo {
@@ -15,9 +15,9 @@ html{
   pointer-events: none;
 }
 
-.My-Name{
-  color:black;
-  font-size:18px;
+.My-Name {
+  color: black;
+  font-size: 18px;
 }
 
 .App-header {
@@ -31,74 +31,88 @@ html{
   padding: 20px 40px;
 }
 
-.App-box{
+.App-box {
   margin-top: 6vh;
 }
 
 .App-link {
-  color: #CC0000;
+  color: #cc0000;
 }
 
-.Pokemon-sprite{
+.Pokemon-sprite {
   width: 60%;
   height: 60%;
 }
 
-.Action-box{
+.Action-box {
   border: 1px solid lightgrey;
   height: 100%;
-  font-family: 'Varela Round', sans-serif;
+  font-family: "Varela Round", sans-serif;
   text-align: center;
   padding: 1.5em 2em 6em 2em;
   border-radius: 5px;
 }
 
-.Main-form{
+.Main-form {
   height: 100%;
 }
 
-.theNinetyPercent{
-  height:90%;
+.theNinetyPercent {
+  height: 90%;
 }
-.End-action-button{
-  width:50%;
+.End-action-button {
+  width: 50%;
 }
 
-.Train-action{
+.Train-action {
   width: 70%;
   margin-top: 2em;
 }
 
-.Start-button{
+.Start-button {
   width: 12em;
 }
 
-.Pokemon-name{
+.Pokemon-name {
   text-transform: capitalize;
   font-size: 2rem;
-  padding:0;
-  margin:0;
+  padding: 0;
+  margin: 0;
   font-weight: 600;
-  color:rgb(145, 24, 24);
+  color: rgb(145, 24, 24);
+}
+
+.Pokedex-image{
+  width: 80%;
 }
 
 @keyframes animate-sprite {
-  0%   {transform: rotate(10deg)}
-  100%  {transform: rotate(-10deg)}
-  100% {transform: rotate(10deg)}
+  0% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
 }
 
-.Pokemon-sprite-small{
+.Pokemon-sprite-small {
   vertical-align: middle;
   height: 3em;
-  padding:0;
-  margin-left:-0.4em;
+  padding: 0;
+  margin-left: -0.4em;
   margin-bottom: 0;
 }
 
-.Fabi{
+.Fabi {
   position: absolute;
   bottom: 0vh;
   right: 0vw;
   left: 0vw;
+}
+
+.Capitalize {
+  text-transform: capitalize;
 }
