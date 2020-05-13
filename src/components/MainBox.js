@@ -26,16 +26,16 @@ const MainBox = ({ appState, actions }) => {
         <React.Fragment>
           <CssBaseline />
           <Container fixed className="App-box">
-            <PokemonFullView></PokemonFullView>
+            <PokemonFullView id="stepOne"></PokemonFullView>
             <Grid container spacing={3}>
               <Grid item sm={4} xs={12}>
                 <ChoosePokemon></ChoosePokemon>
               </Grid>
               <Grid item sm={4} xs={12}>
-                <ChooseMoves></ChooseMoves>
+                <ChooseMoves id="stepTwo"></ChooseMoves>
               </Grid>
               <Grid item sm={4} xs={12}>
-                <TrainPokemon></TrainPokemon>
+                <TrainPokemon id="stepThree"></TrainPokemon>
               </Grid>
             </Grid>
           </Container>

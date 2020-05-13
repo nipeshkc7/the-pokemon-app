@@ -83,6 +83,7 @@ function ChoosePokemon() {
     dispatch(allActions.selectPokemon({ ...pokemon, flavorText }));
     dispatch(allActions.pickMoves());
     setState({ ...state, open: true });
+    dispatch(allActions.toggleView());
   };
 
   let elevation = appState === "PICKING_POKEMON" ? 24 : 0;
@@ -179,6 +180,7 @@ function ChoosePokemon() {
           key={`${vertical},${horizontal}`}
           open={open}
           onClose={handleClose}
+          autoHideDuration={5000}
           message={`Congrats ! You caught a ${pokemon.name}`}
         >
           <Alert onClose={handleClose}>

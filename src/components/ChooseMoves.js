@@ -13,6 +13,7 @@ import Grow from "@material-ui/core/Grow";
 import DoneIcon from "@material-ui/icons/DoneOutlined";
 import { useSelector, useDispatch } from "react-redux";
 import * as allActions from "../actions";
+import Snackbar from "@material-ui/core/Snackbar";
 
 const getMoveByName = (pokemon, name) => {
   if (pokemon === undefined) return;
@@ -30,19 +31,31 @@ const get3RandomMoves = (pokemon) => {
       moveList[Math.floor(Math.random() * (moveList.length - 1))]
     );
   }
-  return RandomMoves;
+  return RandomMoves.map(move=> move.toUpperCase());
 };
 
 const addMove = (moveList, move) => {
   let moveListCopy = [...moveList];
   if (moveList.length === 3) {
     moveListCopy.shift();
-    return [...moveListCopy, move];
+    return [...moveListCopy, move.toUpperCase()];
   }
-  return [...moveList, move];
+  return [...moveList, move.toUpperCase()];
 };
 
 const ChooseMoves = () => {
+  const [state, setState] = useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  });
+
+  const { vertical, horizontal, open } = state;
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
+
   const appState = useSelector((state) => state.AppStatus);
   const pokemon = useSelector((state) => state.Pokemon);
   const dispatch = useDispatch();
@@ -61,7 +74,7 @@ const ChooseMoves = () => {
       if (move !== undefined) {
         setMoveList(addMove(moveList, move));
       } else {
-        alert("Cannot Add move");
+        setState({ ...state, open: true });
       }
     }
   };
@@ -138,6 +151,14 @@ const ChooseMoves = () => {
             Done !
           </Button>
         </form>
+        <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          key={`${vertical},${horizontal}`}
+          open={open}
+          onClose={handleClose}
+          autoHideDuration={5000}
+          message={`Move unavailable ! ☹ `}
+        ></Snackbar>
       </Paper>
     </Grow>
   );
