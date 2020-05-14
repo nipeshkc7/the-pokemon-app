@@ -14,6 +14,8 @@ import DoneIcon from "@material-ui/icons/DoneOutlined";
 import { useSelector, useDispatch } from "react-redux";
 import * as allActions from "../actions";
 import Snackbar from "@material-ui/core/Snackbar";
+import { POKE_API_URL } from "../constants/AppConstants";
+import { PokemonTypes } from "../constants/PokemonTypes";
 
 const getMoveByName = (pokemon, name) => {
   if (pokemon === undefined) return;
@@ -22,25 +24,33 @@ const getMoveByName = (pokemon, name) => {
   return undefined;
 };
 
-const get3RandomMoves = (pokemon) => {
+const get3RandomMoves = async (pokemon) => {
   if (pokemon === undefined) return;
   let moveList = pokemon.moves.map((move) => move.move.name);
   const RandomMoves = [];
   for (let i = 0; i < 3; i++) {
-    RandomMoves.push(
-      moveList[Math.floor(Math.random() * (moveList.length - 1))]
-    );
+    let randomIndex = Math.floor(Math.random() * (moveList.length - 1));
+    let dataForARandomMove = await getMoveData(moveList[randomIndex]);
+    RandomMoves.push(dataForARandomMove);
   }
-  return RandomMoves.map(move=> move.toUpperCase());
+  //return RandomMoves.map(async (move) => await getMoveData(move));
+  return RandomMoves;
 };
 
-const addMove = (moveList, move) => {
+const addMove = async (moveList, move) => {
   let moveListCopy = [...moveList];
   if (moveList.length === 3) {
     moveListCopy.shift();
-    return [...moveListCopy, move.toUpperCase()];
+    return [...moveListCopy, await getMoveData(move)];
   }
-  return [...moveList, move.toUpperCase()];
+  return [...moveList, await getMoveData(move)];
+};
+
+const getMoveData = async (moveName) => {
+  console.log(`get move data ${moveName}`);
+  let moveData = await fetch(`${POKE_API_URL}move/${moveName}`);
+  let moveDataJSON = await moveData.json();
+  return { ...moveDataJSON };
 };
 
 const ChooseMoves = () => {
@@ -63,16 +73,17 @@ const ChooseMoves = () => {
 
   let elevation = appState === "PICKING_MOVES" ? 24 : 0;
 
-  const handleGenerateMoves = () => {
-    setMoveList(get3RandomMoves(pokemon));
+  const handleGenerateMoves = async () => {
+    let random3Moves = await get3RandomMoves(pokemon);
+    setMoveList(random3Moves);
   };
 
-  const findMove = (e) => {
+  const findMove = async (e) => {
     e.preventDefault();
     if (e.key === "Enter") {
       let move = getMoveByName(pokemon, e.target.value);
       if (move !== undefined) {
-        setMoveList(addMove(moveList, move));
+        setMoveList(await addMove(moveList, move));
       } else {
         setState({ ...state, open: true });
       }
@@ -127,10 +138,17 @@ const ChooseMoves = () => {
                   <ListItem>
                     <ListItemAvatar>
                       <Avatar>
-                        <DoneIcon />
+                        {
+                          PokemonTypes.find(
+                            (pokemonType) => pokemonType.name === move.type.name
+                          ).icon
+                        }
                       </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary={move} secondary="No Type" />
+                    <ListItemText
+                      primary={move.name}
+                      secondary={move.type.name}
+                    />
                   </ListItem>
                 ))}
               </List>
@@ -143,7 +161,7 @@ const ChooseMoves = () => {
             disabled={appState !== "PICKING_MOVES"}
             onClick={() => {
               moveList.forEach((move) => {
-                if (move !== undefined) dispatch(allActions.addMove(move));
+                if (move !== undefined) dispatch(allActions.addMove(move.name));
               });
               dispatch(allActions.trainPokemon());
             }}

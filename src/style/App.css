@@ -116,3 +116,7 @@ html {
 .Capitalize {
   text-transform: capitalize;
 }
+
+.Player-boosted-stats {
+  color: red;
+}

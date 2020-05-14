@@ -11,8 +11,10 @@ import Typography from "@material-ui/core/Typography";
 import { useSelector, useDispatch } from "react-redux";
 import * as allActions from "../actions";
 import Grid from "@material-ui/core/Grid";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import Chip from "@material-ui/core/Chip";
+import Avatar from "@material-ui/core/Avatar";
 import { POKE_IMAGE_API_URL } from "../constants/AppConstants";
+import { PokemonTypes } from "../constants/PokemonTypes";
 
 const styles = (theme) => ({
   root: {
@@ -59,7 +61,6 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 
 export default function PokemonFullView() {
-  const appState = useSelector((state) => state.AppStatus);
   const pokemon = useSelector((state) => state.Pokemon);
   const viewPokemon = useSelector((state) => state.ViewPokemon);
 
@@ -76,8 +77,30 @@ export default function PokemonFullView() {
           aria-labelledby="customized-dialog-title"
           open={viewPokemon}
         >
-          <DialogTitle id="customized-dialog-title" onClose={handleClose} className="Capitalize ">
-            <b>{pokemon.name}</b>
+          <DialogTitle
+            id="customized-dialog-title"
+            onClose={handleClose}
+            className="Capitalize "
+          >
+            <b>{pokemon.name} &nbsp;</b>
+            {pokemon.types.map((type) => {
+              return (
+                <Chip
+                  className="Player-chosen-type"
+                  clickable
+                  avatar={
+                    <Avatar>
+                      {
+                        PokemonTypes.find(
+                          (pType) => pType.name === type.type.name
+                        ).icon
+                      }
+                    </Avatar>
+                  }
+                  label={type.type.name}
+                ></Chip>
+              );
+            })}
           </DialogTitle>
           <DialogContent dividers>
             <Grid container spacing={3}>
@@ -88,18 +111,40 @@ export default function PokemonFullView() {
                 />
               </Grid>
               <Grid item sm={6} xs={12}>
-                <Typography gutterBottom>
+                <h2 gutterBottom>
                   <b>Stats</b>
-                </Typography>
-                Attack: {pokemon.stats[4].base_stat}
+                </h2>
+                <b>Attack:</b> {pokemon.stats[4].base_stat}{" "}
+                {pokemon.playerBoostedStats !== undefined && (
+                  <span class="Player-boosted-stats"><i>+{pokemon.playerBoostedStats.attack}</i></span>
+                )}
                 <br />
-                Defense: {pokemon.stats[5].base_stat}
+                <b> Defense:</b> {pokemon.stats[5].base_stat}{" "}
+                {pokemon.playerBoostedStats !== undefined && (
+                  <span class="Player-boosted-stats"><i>+{pokemon.playerBoostedStats.attack}</i></span>
+                )}
                 <br />
-                Loved: {0}
+                <b>Speed:</b> {pokemon.stats[0].base_stat}
                 <br />
-                Obedient: {0}
+                <b>Special Attack:</b> {pokemon.stats[2].base_stat}
                 <br />
-                Clean: {0}
+                <b>Special Defense:</b> {pokemon.stats[3].base_stat}
+                <br />
+                <b>Loved:</b> {0}{" "}
+                {pokemon.playerBoostedStats !== undefined && (
+                  <span class="Player-boosted-stats"><i>+{pokemon.playerBoostedStats.user_affection}</i></span>
+                )}
+                <br />
+                <b>Obedient:</b> {0}{" "}
+                {pokemon.playerBoostedStats !== undefined && (
+                  <span class="Player-boosted-stats"><i>+{pokemon.playerBoostedStats.obedience}</i></span>
+                )}
+                <br />
+                <b>Clean:</b> {0}{" "}
+                {pokemon.playerBoostedStats !== undefined && (
+                  <span class="Player-boosted-stats"><i>+{pokemon.playerBoostedStats.hygiene}</i></span>
+                )}
+                <br />
                 <br />
                 {/* <LinearProgress/> */}
               </Grid>
