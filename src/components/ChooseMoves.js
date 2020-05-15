@@ -10,7 +10,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Grow from "@material-ui/core/Grow";
-import DoneIcon from "@material-ui/icons/DoneOutlined";
 import { useSelector, useDispatch } from "react-redux";
 import * as allActions from "../actions";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -33,7 +32,6 @@ const get3RandomMoves = async (pokemon) => {
     let dataForARandomMove = await getMoveData(moveList[randomIndex]);
     RandomMoves.push(dataForARandomMove);
   }
-  //return RandomMoves.map(async (move) => await getMoveData(move));
   return RandomMoves;
 };
 

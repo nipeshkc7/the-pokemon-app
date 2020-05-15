@@ -2,8 +2,11 @@ import React from "react";
 import "../style/App.css";
 import Pokeball from "../assets/pokeball.png";
 import Button from "@material-ui/core/Button";
+import { useDispatch } from "react-redux";
+import * as allActions from "../actions";
 
-const StartBox = ({ appState, actions }) => {
+const StartBox = () => {
+  const dispatch = useDispatch();
   return (
     <div className="App-header">
       <img src={Pokeball} className="App-logo" alt="logo" />
@@ -21,7 +24,7 @@ const StartBox = ({ appState, actions }) => {
         color="secondary"
         className="Start-button"
         onClick={() => {
-          actions.startApp();
+          dispatch(allActions.startApp());
         }}
       >
         <b>Start</b>

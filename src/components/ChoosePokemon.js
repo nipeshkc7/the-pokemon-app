@@ -55,10 +55,6 @@ function ChoosePokemon() {
 
   const { vertical, horizontal, open } = state;
 
-  const handleClick = (newState) => () => {
-    setState({ open: true, ...newState });
-  };
-
   const handleClose = () => {
     setState({ ...state, open: false });
   };
@@ -142,7 +138,6 @@ function ChoosePokemon() {
               })}
             <br />
             <br />
-
             <br />
             <br />
             <div>
@@ -174,20 +169,24 @@ function ChoosePokemon() {
             </Button>
           )}
         </form>
-        {pokemon.sprites !== undefined &&
-        <Snackbar
-          anchorOrigin={{ vertical, horizontal }}
-          key={`${vertical},${horizontal}`}
-          open={open}
-          onClose={handleClose}
-          autoHideDuration={5000}
-          message={`Congrats ! You caught a ${pokemon.name}`}
-        >
-          <Alert onClose={handleClose}>
-            Congrats You caught a {pokemon.name} ! <img className="Pokemon-sprite-small" src={pokemon.sprites.front_default}/>
-          </Alert>
-        </Snackbar>
-        }
+        {pokemon.sprites !== undefined && (
+          <Snackbar
+            anchorOrigin={{ vertical, horizontal }}
+            key={`${vertical},${horizontal}`}
+            open={open}
+            onClose={handleClose}
+            autoHideDuration={5000}
+            message={`Congrats ! You caught a ${pokemon.name}`}
+          >
+            <Alert onClose={handleClose}>
+              Congrats You caught a {pokemon.name} !{" "}
+              <img
+                className="Pokemon-sprite-small"
+                src={pokemon.sprites.front_default}
+              />
+            </Alert>
+          </Snackbar>
+        )}
       </Paper>
     </Grow>
   );

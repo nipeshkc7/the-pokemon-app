@@ -1,6 +1,6 @@
 import React from "react";
 import "../style/App.css";
-import StartBox from "../containers/StartBox";
+import StartBox from "../components/StartBox";
 import * as types from "../constants/ActionTypes";
 import Grid from "@material-ui/core/Grid";
 import ChoosePokemon from "../components/ChoosePokemon";
