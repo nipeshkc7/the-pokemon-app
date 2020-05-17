@@ -120,3 +120,8 @@ html {
 .Player-boosted-stats {
   color: red;
 }
+
+.Absolute-center{
+  position:absolute;
+  margin-top: 1em;
+}

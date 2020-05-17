@@ -15,6 +15,7 @@ import * as allActions from "../actions";
 import Snackbar from "@material-ui/core/Snackbar";
 import { POKE_API_URL } from "../constants/AppConstants";
 import { PokemonTypes } from "../constants/PokemonTypes";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const getMoveByName = (pokemon, name) => {
   if (pokemon === undefined) return;
@@ -68,23 +69,28 @@ const ChooseMoves = () => {
   const pokemon = useSelector((state) => state.Pokemon);
   const dispatch = useDispatch();
   const [moveList, setMoveList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   let elevation = appState === "PICKING_MOVES" ? 24 : 0;
 
   const handleGenerateMoves = async () => {
+    setLoading(true);
     let random3Moves = await get3RandomMoves(pokemon);
     setMoveList(random3Moves);
+    setLoading(false);
   };
 
   const findMove = async (e) => {
     e.preventDefault();
     if (e.key === "Enter") {
+      setLoading(true);
       let move = getMoveByName(pokemon, e.target.value);
       if (move !== undefined) {
         setMoveList(await addMove(moveList, move));
       } else {
         setState({ ...state, open: true });
       }
+      setLoading(false);
     }
   };
 
@@ -131,8 +137,15 @@ const ChooseMoves = () => {
               Get Random Moves
             </Button>
             <div>
-              <List>
-                {moveList.map((move) => (
+              {loading === true && (
+                <CircularProgress
+                  color="secondary"
+                  className="Absolute-center"
+                />
+              )}
+              {loading === false && (
+                <List>
+                  {moveList.map((move) => (
                   <ListItem>
                     <ListItemAvatar>
                       <Avatar>
@@ -148,8 +161,9 @@ const ChooseMoves = () => {
                       secondary={move.type.name}
                     />
                   </ListItem>
-                ))}
-              </List>
+                  ))}
+                </List>
+              )}
             </div>
           </div>
           <Button

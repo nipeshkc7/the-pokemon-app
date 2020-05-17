@@ -15,6 +15,7 @@ import Chip from "@material-ui/core/Chip";
 import Avatar from "@material-ui/core/Avatar";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const getAdditionalInfo = async (pokemonName) => {
   let additionalInfo = await fetch(
@@ -53,6 +54,7 @@ function ChoosePokemon() {
     horizontal: "center",
   });
 
+  const [loading, setLoading] = useState(false);
   const { vertical, horizontal, open } = state;
 
   const handleClose = () => {
@@ -73,8 +75,10 @@ function ChoosePokemon() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     let pokemon = await getRandomPokemon(playerPreference);
     let flavorText = await getFlavorText(pokemon.name);
+    setLoading(false);
     setPokemonImg(`${POKE_IMAGE_API_URL}${pokemon.id}.png`);
     dispatch(allActions.selectPokemon({ ...pokemon, flavorText }));
     dispatch(allActions.pickMoves());
@@ -141,7 +145,12 @@ function ChoosePokemon() {
             <br />
             <br />
             <div>
-              <img className="Pokemon-sprite" src={pokemonImg} />
+              {loading === true && (
+                <CircularProgress color="secondary" className="Absolute-center" />
+              )}
+              {loading === false && (
+                <img className="Pokemon-sprite" src={pokemonImg} />
+              )}
             </div>
             <b className="Pokemon-name">
               <a href="">{pokemon.name}</a>
