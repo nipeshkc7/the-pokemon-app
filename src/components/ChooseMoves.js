@@ -114,7 +114,6 @@ const ChooseMoves = () => {
         </Typography>
         <hr />
         <form autoComplete="off" className="Main-form" onSubmit={handleSubmit}>
-          <br />
           <div className="theNinetyPercent">
             <TextField
               id="standard-basic"
@@ -122,11 +121,7 @@ const ChooseMoves = () => {
               onKeyUp={findMove}
               disabled={appState !== "PICKING_MOVES"}
             />
-            <br />
-            <br />
-            OR,
-            <br />
-            <br />
+            <div className="Or">OR,</div>
             <Button
               variant="contained"
               color="secondary"
@@ -146,21 +141,22 @@ const ChooseMoves = () => {
               {loading === false && (
                 <List>
                   {moveList.map((move) => (
-                  <ListItem>
-                    <ListItemAvatar>
-                      <Avatar>
-                        {
-                          PokemonTypes.find(
-                            (pokemonType) => pokemonType.name === move.type.name
-                          ).icon
-                        }
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={move.name}
-                      secondary={move.type.name}
-                    />
-                  </ListItem>
+                    <ListItem>
+                      <ListItemAvatar>
+                        <Avatar>
+                          {
+                            PokemonTypes.find(
+                              (pokemonType) =>
+                                pokemonType.name === move.type.name
+                            ).icon
+                          }
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={move.name}
+                        secondary={move.type.name}
+                      />
+                    </ListItem>
                   ))}
                 </List>
               )}

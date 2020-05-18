@@ -56,6 +56,7 @@ html {
 
 .theNinetyPercent {
   height: 90%;
+  padding: 1rem 0rem;
 }
 .End-action-button {
   width: 50%;
@@ -63,7 +64,6 @@ html {
 
 .Train-action {
   width: 70%;
-  margin-top: 2em;
 }
 
 .Start-button {
@@ -79,7 +79,7 @@ html {
   color: rgb(145, 24, 24);
 }
 
-.Pokedex-image{
+.Pokedex-image {
   width: 80%;
 }
 
@@ -118,7 +118,28 @@ html {
   color: red;
 }
 
-.Absolute-center{
-  position:absolute;
+.Absolute-center {
+  position: absolute;
   margin-top: 1em;
+}
+
+.Pokemon-image-box {
+  margin-top: 4em;
+}
+
+.Or {
+  margin: 1em 0em;
+}
+
+.Actions-buttons {
+  height: 100%;
+  margin: 0em 0em;
+}
+
+.Points-left{
+  margin: 1em 0em;
+}
+
+.Train-button-container{
+  margin:1em 0em;
 }

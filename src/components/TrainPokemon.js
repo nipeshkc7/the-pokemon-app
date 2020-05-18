@@ -63,10 +63,9 @@ const TrainPokemon = () => {
           </b>
         </Typography>
         <hr />
-        Points left: {TrainCounter}
         <form noValidate autoComplete="off" className="Main-form">
           <div className="theNinetyPercent">
-            <br />
+            <div className="Points-left">Points left: {TrainCounter}</div>
             <Button
               variant="outlined"
               color="secondary"
@@ -79,65 +78,65 @@ const TrainPokemon = () => {
               </span>{" "}
               Simulate random training
             </Button>
-            <br />
-            <br />
-            OR,
-            <br />
-            <br />
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={train}
-              disabled={appState !== "TRAINING_POKEMON"}
-              className="Train-action"
-            >
-              <span role="img" aria-label="emoji">
-                💪
-              </span>{" "}
-              TRAIN POKEMON
-            </Button>
-            <br />
-            <br />
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={giveBerries}
-              disabled={appState !== "TRAINING_POKEMON"}
-              className="Train-action"
-            >
-              <span role="img" aria-label="emoji">
-                🍒
-              </span>{" "}
-              GIVE BERRIES
-            </Button>
-            <br />
-            <br />
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={pet}
-              disabled={appState !== "TRAINING_POKEMON"}
-              className="Train-action"
-            >
-              <span role="img" aria-label="emoji">
-                🐹
-              </span>{" "}
-              PET EM'
-            </Button>
-            <br />
-            <br />
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={bathe}
-              disabled={appState !== "TRAINING_POKEMON"}
-              className="Train-action"
-            >
-              <span role="img" aria-label="emoji">
-                🛁
-              </span>{" "}
-              BATHE
-            </Button>
+            <div className="Or">OR,</div>
+            <div className="Actions-buttons">
+              <div className="Train-button-container">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={train}
+                  disabled={appState !== "TRAINING_POKEMON"}
+                  className="Train-action"
+                >
+                  <span role="img" aria-label="emoji">
+                    💪
+                  </span>{" "}
+                  TRAIN POKEMON
+                </Button>
+              </div>
+              <div className="Train-button-container">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={giveBerries}
+                  disabled={appState !== "TRAINING_POKEMON"}
+                  className="Train-action"
+                >
+                  <span role="img" aria-label="emoji">
+                    🍒
+                  </span>{" "}
+                  GIVE BERRIES
+                </Button>
+              </div>
+              <div className="Train-button-container">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={pet}
+                  disabled={appState !== "TRAINING_POKEMON"}
+                  className="Train-action"
+                >
+                  <span role="img" aria-label="emoji">
+                    🐹
+                  </span>{" "}
+                  PET EM'
+                </Button>
+              </div>
+              <div className="Train-button-container">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={bathe}
+                  disabled={appState !== "TRAINING_POKEMON"}
+                  className="Train-action"
+                >
+                  <span role="img" aria-label="emoji">
+                    🛁
+                  </span>{" "}
+                  BATHE
+                </Button>
+              </div>
+            </div>
           </div>
           <Button
             variant="contained"

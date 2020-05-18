@@ -105,7 +105,6 @@ function ChoosePokemon() {
         <hr />
         <form autoComplete="off" className="Main-form" onSubmit={handleSubmit}>
           <div className="theNinetyPercent">
-            <br />
             {appState === "PICKING_POKEMON" && (
               <TextField
                 name="pokemonType"
@@ -140,11 +139,7 @@ function ChoosePokemon() {
                   ></Chip>
                 );
               })}
-            <br />
-            <br />
-            <br />
-            <br />
-            <div>
+            <div className="Pokemon-image-box">
               {loading === true && (
                 <CircularProgress color="secondary" className="Absolute-center" />
               )}
@@ -156,7 +151,6 @@ function ChoosePokemon() {
               <a href="">{pokemon.name}</a>
             </b>
           </div>
-          <br />
           {appState === "PICKING_POKEMON" && (
             <Button
               type="submit"
