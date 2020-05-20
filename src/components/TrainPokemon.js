@@ -9,7 +9,6 @@ import * as allActions from "../actions";
 
 const TrainPokemon = () => {
   const appState = useSelector((state) => state.AppStatus);
-  const pokemon = useSelector((state) => state.Pokemon);
   const [TrainCounter, setTrainCounter] = useState(10);
   const dispatch = useDispatch();
   let elevation = appState === "TRAINING_POKEMON" ? 24 : 0;
