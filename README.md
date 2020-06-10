@@ -4,7 +4,14 @@
 
 💻🕸 Find the app at [thepokemonapp.now.sh](https://thepokemonapp.now.sh/) 
 
+
 ⚛⚛ This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Let's Connect
+
+  [![Twitter Follow](https://img.shields.io/twitter/follow/nipeshkc7.svg?style=for-the-badge&logo=twitter)](https://twitter.com/Nipeshkc7)
+  [![GitHub followers](https://img.shields.io/github/followers/nipeshkc7.svg?label=Follow&style=for-the-badge&logo=github)](https://github.com/nipeshkc7/) 
+ [![LinkedIn](https://img.shields.io/static/v1.svg?label=connect&message=@ArpanKC&color=success&logo=linkedin&style=for-the-badge&logoColor=white&colorA=blue)](https://www.linkedin.com/in/arpan-kc7/)
 
 ## Available Scripts
 
