@@ -8,6 +8,8 @@ import MuiDialogActions from "@material-ui/core/DialogActions";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import LinearProgress from '@material-ui/core/LinearProgress';
 import { useSelector, useDispatch } from "react-redux";
 import * as allActions from "../actions";
 import Grid from "@material-ui/core/Grid";
@@ -59,6 +61,27 @@ const DialogActions = withStyles((theme) => ({
     padding: theme.spacing(1),
   },
 }))(MuiDialogActions);
+
+const BorderLinearProgress = withStyles((theme) => ({
+  root: {
+    marginBottom: '10px',
+    height: 4,
+    borderRadius: 5,
+  },
+  bar2Buffer: {
+    // borderRadius: 5,
+    backgroundColor: 'red',
+  },
+  bar1Buffer: {
+    // borderRadius: 5,
+    backgroundColor: '#3b4cca',
+  },
+}))(LinearProgress);
+
+function calculatePercentage(given) {
+  const maxValue = 350
+  return ((given || 0) / maxValue) * 100
+}
 
 export default function PokemonFullView() {
   const pokemon = useSelector((state) => state.Pokemon);
@@ -116,37 +139,49 @@ export default function PokemonFullView() {
                 </h2>
                 <b>Attack:</b> {pokemon.stats[4].base_stat}{" "}
                 {pokemon.playerBoostedStats !== undefined && (
-                  <span class="Player-boosted-stats"><i>+{pokemon.playerBoostedStats.attack}</i></span>
+                  <span class="Player-boosted-stats"><i>+{pokemon.playerBoostedStats?.attack}</i></span>
                 )}
-                <br />
+                <BorderLinearProgress variant="buffer" value={calculatePercentage(pokemon.stats[4]?.base_stat)} valueBuffer={calculatePercentage(pokemon.stats[4]?.base_stat + pokemon.playerBoostedStats?.attack)} />
+
                 <b> Defense:</b> {pokemon.stats[5].base_stat}{" "}
                 {pokemon.playerBoostedStats !== undefined && (
-                  <span class="Player-boosted-stats"><i>+{pokemon.playerBoostedStats.attack}</i></span>
+                  <span class="Player-boosted-stats"><i>+{pokemon.playerBoostedStats?.attack}</i></span>
                 )}
-                <br />
-                <b>Speed:</b> {pokemon.stats[0].base_stat}
-                <br />
-                <b>Special Attack:</b> {pokemon.stats[2].base_stat}
-                <br />
-                <b>Special Defense:</b> {pokemon.stats[3].base_stat}
-                <br />
-                <b>Loved:</b> {0}{" "}
-                {pokemon.playerBoostedStats !== undefined && (
-                  <span class="Player-boosted-stats"><i>+{pokemon.playerBoostedStats.user_affection}</i></span>
-                )}
-                <br />
-                <b>Obedient:</b> {0}{" "}
-                {pokemon.playerBoostedStats !== undefined && (
-                  <span class="Player-boosted-stats"><i>+{pokemon.playerBoostedStats.obedience}</i></span>
-                )}
-                <br />
-                <b>Clean:</b> {0}{" "}
-                {pokemon.playerBoostedStats !== undefined && (
-                  <span class="Player-boosted-stats"><i>+{pokemon.playerBoostedStats.hygiene}</i></span>
-                )}
-                <br />
-                <br />
-                {/* <LinearProgress/> */}
+                <BorderLinearProgress variant="buffer" value={calculatePercentage(pokemon.stats[5]?.base_stat)} valueBuffer={calculatePercentage(pokemon.stats[5]?.base_stat + pokemon.playerBoostedStats?.attack)} />
+
+                <b>Speed:</b> {pokemon.stats[0].base_stat} {" "}
+                <BorderLinearProgress variant="buffer" value={calculatePercentage(pokemon.stats[0]?.base_stat)} valueBuffer={calculatePercentage(pokemon.stats[0]?.base_stat + pokemon.playerBoostedStats?.attack)} />
+
+                <b>Special Attack:</b> {pokemon.stats[2].base_stat} {" "}
+                <BorderLinearProgress variant="buffer" value={calculatePercentage(pokemon.stats[2]?.base_stat)} valueBuffer={calculatePercentage(pokemon.stats[2]?.base_stat + pokemon.playerBoostedStats?.attack)} />
+
+                <b>Special Defense:</b> {pokemon.stats[3].base_stat}{" "}
+                <BorderLinearProgress variant="buffer" value={calculatePercentage(pokemon.stats[3]?.base_stat)} valueBuffer={calculatePercentage(pokemon.stats[3]?.base_stat + pokemon.playerBoostedStats?.attack)} />
+
+                <Box>
+                  <b>Loved:</b> {0}{" "}
+                  {pokemon.playerBoostedStats !== undefined && (
+                    <span class="Player-boosted-stats"><i>+{pokemon.playerBoostedStats.user_affection}</i></span>
+                  )}
+                  {/* <BorderLinearProgress variant="buffer" value={calculatePercentage(pokemon.stats[4]?.base_stat)} valueBuffer={calculatePercentage(pokemon.stats[4]?.base_stat + pokemon.playerBoostedStats?.attack)} /> */}
+                </Box>
+
+                <Box>
+                  <b>Obedient:</b> {0}{" "}
+                  {pokemon.playerBoostedStats !== undefined && (
+                    <span class="Player-boosted-stats"><i>+{pokemon.playerBoostedStats.obedience}</i></span>
+                  )}
+                  {/* <BorderLinearProgress variant="buffer" value={calculatePercentage(pokemon.stats[4]?.base_stat)} valueBuffer={calculatePercentage(pokemon.stats[4]?.base_stat + pokemon.playerBoostedStats?.attack)} /> */}
+                </Box>
+
+                <Box>
+                  <b>Clean:</b> {0}{" "}
+                  {pokemon.playerBoostedStats !== undefined && (
+                    <span class="Player-boosted-stats"><i>+{pokemon.playerBoostedStats.hygiene}</i></span>
+                  )}
+                  {/* <BorderLinearProgress variant="buffer" value={calculatePercentage(pokemon.stats[4]?.base_stat)} valueBuffer={calculatePercentage(pokemon.stats[4]?.base_stat + pokemon.playerBoostedStats?.attack)} /> */}
+                </Box>
+
               </Grid>
             </Grid>
             <Typography gutterBottom>{pokemon.flavorText}</Typography>
